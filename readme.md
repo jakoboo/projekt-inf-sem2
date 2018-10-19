@@ -1,4 +1,4 @@
-Projekt napisany w GO, uzywajac biblioteki [go-sdl2](https://github.com/veandco/go-sdl2)
+Projekt na przedmiot "Metody informatyczne w fizyce" PP WFT, FT sem.2 napisany w GO, uzywajac biblioteki [go-sdl2](https://github.com/veandco/go-sdl2)
 
 Zawiera binarke na linuxa gotowa do sprawdzenia.
 
