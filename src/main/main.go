@@ -26,36 +26,26 @@ func run() int {
 	var running bool
 	var err error
 
-	sdl.Do(func() {
-		window, err = sdl.CreateWindow(winTitle, sdl.WINDOWPOS_UNDEFINED, sdl.WINDOWPOS_UNDEFINED, winWidth, winHeight, sdl.WINDOW_OPENGL)
-	})
+	window, err = sdl.CreateWindow(winTitle, sdl.WINDOWPOS_UNDEFINED, sdl.WINDOWPOS_UNDEFINED, winWidth, winHeight, sdl.WINDOW_OPENGL)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Failed to create window: %s\n", err)
 		return 1
 	}
 	defer func() {
-		sdl.Do(func() {
-			window.Destroy()
-		})
+		window.Destroy()
 	}()
 
-	sdl.Do(func() {
-		renderer, err = sdl.CreateRenderer(window, -1, sdl.RENDERER_ACCELERATED)
-	})
+	renderer, err = sdl.CreateRenderer(window, -1, sdl.RENDERER_ACCELERATED)
 	if err != nil {
 		fmt.Fprint(os.Stderr, "Failed to create renderer: %s\n", err)
 		return 2
 	}
 	defer func() {
-		sdl.Do(func() {
-			renderer.Destroy()
-		})
+		renderer.Destroy()
 	}()
 
-	sdl.Do(func() {
-		renderer.Clear()
-	})
-
+	renderer.Clear()
+	
 	running = true
 	isCreatingPlanet = false
 	for running {
@@ -64,9 +54,7 @@ func run() int {
 			planet.radius++
 		}
 
-		sdl.Do(func() {
-			simulation()
-		})
+		simulation()
 
 		for event = sdl.PollEvent(); event != nil; event = sdl.PollEvent() {
 			switch t := event.(type) {
@@ -78,9 +66,7 @@ func run() int {
 			case *sdl.MouseButtonEvent:
 				if t.State == 1 {
 					isCreatingPlanet = true
-					sdl.Do(func() {
-						newPlanet(t)
-					})
+					newPlanet(t)
 				} else {
 					isCreatingPlanet = false
 				}
@@ -237,9 +223,7 @@ func simulation() {
 
 func main() {
 	var exitcode int
-	sdl.Main(func() {
-		exitcode = run()
-	})
+	exitcode = run()
 
 	os.Exit(exitcode)
 }
